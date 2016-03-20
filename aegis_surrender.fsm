@@ -1,0 +1,245 @@
+/*%FSM<COMPILE "C:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, aegis_surrender">*/
+/*%FSM<HEAD>*/
+/*
+item0[] = {"Start",0,4346,-36.742321,172.664154,53.257679,222.664429,0.000000,"Start"};
+item1[] = {"Distance____1_5m",4,218,-37.427155,-87.740189,52.572845,-37.740639,0.000000,"Distance " \n "< 1,5m"};
+item2[] = {"Surrender",2,250,-37.106915,-267.197327,52.893063,-217.197357,0.000000,"Surrender"};
+item3[] = {"End",1,250,96.987717,-341.073792,186.987732,-291.074585,0.000000,"End"};
+item4[] = {"not_alive",4,218,97.110504,-268.104797,187.110611,-218.104919,2.000000,"not alive"};
+item5[] = {"Distance___10_m",4,218,-226.996613,-268.091370,-136.996613,-218.091400,0.000000,"Distance" \n " >10 m"};
+item6[] = {"Looping",2,250,-224.142700,-97.430153,-134.142731,-47.430145,0.000000,"Looping"};
+item7[] = {"Initial_form",2,250,-37.343399,-13.443203,52.656616,36.556793,0.000000,"Initial form"};
+item8[] = {"sleep_1",4,218,-178.422073,-13.414322,-88.422058,36.585678,0.000000,"sleep 1"};
+item9[] = {"True",8,218,-37.247547,79.570007,52.752453,129.569855,0.000000,"True"};
+item10[] = {"__________Set_debug",-1,250,74.354919,177.022263,345.504089,292.869446,0.000000,"" \n "<======= Set debug mode here" \n "" \n "_debug = 0 to false" \n "_debug = 1 to true  " \n "   "};
+item11[] = {"In_sight",4,218,-36.983284,-196.750015,53.016716,-146.750443,0.000000,"In sight"};
+item12[] = {"_",2,250,-20.640940,-124.792847,35.954178,-109.125717,0.000000,""};
+item13[] = {"__1",2,250,-210.550217,-201.038940,-153.955093,-185.371796,0.000000,""};
+item14[] = {"Out_of_sight",4,218,-224.068619,-170.628662,-134.068619,-120.629089,0.000000,"Out of sight"};
+version=1;
+class LayoutItems
+{
+	class Item10
+	{
+		class ItemInfo
+		{
+			FontFace="Arial";
+			FontHeight=14;
+			lStyle=1;
+		};
+		BgColor=12632256;
+	};
+};
+link0[] = {0,9};
+link1[] = {1,12};
+link2[] = {2,4};
+link3[] = {2,5};
+link4[] = {4,3};
+link5[] = {5,13};
+link6[] = {6,8};
+link7[] = {7,1};
+link8[] = {8,7};
+link9[] = {9,7};
+link10[] = {11,2};
+link11[] = {12,11};
+link12[] = {13,14};
+link13[] = {14,6};
+globals[] = {0.000000,0,0,0,0,640,480,1,49,6316128,1,-456.533386,635.621338,293.688629,-348.755280,1547,910,1};
+window[] = {2,-1,-1,-1,-1,846,104,1789,104,3,1565};
+*//*%FSM</HEAD>*/
+class FSM
+{
+  fsmName = "aegis_surrender";
+  class States
+  {
+    /*%FSM<STATE "Start">*/
+    class Start
+    {
+      name = "Start";
+      init = /*%FSM<STATEINIT""">*/"_debug = 0"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "True">*/
+        class True
+        {
+          priority = 0.000000;
+          to="Initial_form";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Surrender">*/
+    class Surrender
+    {
+      name = "Surrender";
+      init = /*%FSM<STATEINIT""">*/"_beh = [1, 1, 1, 1, 1, 1, 0, 0,  _vs_1, _vs_2] call BIS_fnc_selectRandom;" \n
+       "" \n
+       "if (_beh == 1) then" \n
+       "{" \n
+       "	[_this, true] call ACE_captives_fnc_setSurrendered;" \n
+       "}" \n
+       "else" \n
+       "{" \n
+       "	_this setBehaviour ""COMBAT"";" \n
+       " 	_this doFire player;" \n
+       "};" \n
+       "" \n
+       "" \n
+       "/*-------------------------------DEBUG----------------------------------- */" \n
+       "" \n
+       "if (_debug == 1) then" \n
+       "{" \n
+       "	_prob = {_x == 1} count [1, 1, 1, 1, 1, 1, 0, 0,  _vs_1, _vs_2];" \n
+       "	_perc = (_prob/10)*100;" \n
+       "	hint format [""Probability to surrender: %1%"", _perc];" \n
+       "" \n
+       "if (_beh == 1) then" \n
+       "{" \n
+       "	_this globalChat ""Surender true"";" \n
+       "}" \n
+       "else" \n
+       "{" \n
+       "	_this globalChat ""Surender false"";" \n
+       "};" \n
+       "" \n
+       "};"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "not_alive">*/
+        class not_alive
+        {
+          priority = 2.000000;
+          to="End";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"not alive _this"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "Distance___10_m">*/
+        class Distance___10_m
+        {
+          priority = 0.000000;
+          to="__1";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"((position player) distance (position _this)) > 10;"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "End">*/
+    class End
+    {
+      name = "End";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Looping">*/
+    class Looping
+    {
+      name = "Looping";
+      init = /*%FSM<STATEINIT""">*/"_time = time;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "sleep_1">*/
+        class sleep_1
+        {
+          priority = 0.000000;
+          to="Initial_form";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"_time + 1 < time"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Initial_form">*/
+    class Initial_form
+    {
+      name = "Initial_form";
+      init = /*%FSM<STATEINIT""">*/"_vs_1 = 0;" \n
+       "_vs_2 = 0;" \n
+       "[_this, false] call ACE_captives_fnc_setSurrendered;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Distance____1_5m">*/
+        class Distance____1_5m
+        {
+          priority = 0.000000;
+          to="_";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"((position player) distance (position _this)) < 1.5;" \n
+           "//cursorObject == _this;" \n
+           ""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "_">*/
+    class _
+    {
+      name = "_";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "In_sight">*/
+        class In_sight
+        {
+          priority = 0.000000;
+          to="Surrender";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"cursorObject == _this;" \n
+           ""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "__1">*/
+    class __1
+    {
+      name = "__1";
+      init = /*%FSM<STATEINIT""">*/""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Out_of_sight">*/
+        class Out_of_sight
+        {
+          priority = 0.000000;
+          to="Looping";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"cursorObject != _this;" \n
+           ""/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+  };
+  initState="Start";
+  finalStates[] =
+  {
+    "End",
+  };
+};
+/*%FSM</COMPILE>*/
