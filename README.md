@@ -1,4 +1,4 @@
-# [![pic1](http://i.imgur.com/ocMS9P8.png)]
+# ![pic1](http://i.imgur.com/ocMS9P8.png)
 # AEGIS_SURRENDER v0.1
 
 This is a simple script that I made to simulate a surprise surrender, where
@@ -7,7 +7,7 @@ If you distance more than 10 meters and the enemy is out of sight he will return
 
 #FSM schematic
 
-# ![pic2](http://i.imgur.com/SU7Be3e.jpg)]
+# ![pic2](http://i.imgur.com/SU7Be3e.jpg)
 
 #VIDEOS (click on gifs for complete videos)
 [![video](https://j.gifs.com/wpZGjR.gif)](https://www.youtube.com/watch?v=zETOkt7ED_c&feature=youtu.be)
