@@ -11,5 +11,3 @@ while { true } do {
   } forEach _units;
 };
 sleep 1;
-
-_this action ["useWeapon", player, player, 2];
